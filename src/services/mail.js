@@ -17,7 +17,7 @@ function buildInternalEmail(payload) {
     ['Email', payload.email],
     ['Telephone', payload.telephone || '—'],
     ['What they need', payload.need],
-    ['Project details', payload.project],
+    ['Project details', payload.project || '—'],
     ['Source', payload.source || 'website'],
   ]
 

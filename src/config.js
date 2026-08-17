@@ -25,9 +25,15 @@ const config = {
 }
 
 function assertReadyForSend() {
-  required('SENDGRID_API_KEY')
-  required('SENDGRID_FROM_EMAIL')
-  required('SENDGRID_TO_EMAIL')
+  if (!config.sendgrid.apiKey) {
+    throw new Error('Missing required environment variable: SENDGRID_API_KEY')
+  }
+  if (!config.sendgrid.fromEmail) {
+    throw new Error('Missing required environment variable: SENDGRID_FROM_EMAIL')
+  }
+  if (!config.sendgrid.toEmail) {
+    throw new Error('Missing required environment variable: SENDGRID_TO_EMAIL')
+  }
 }
 
 module.exports = { config, assertReadyForSend }

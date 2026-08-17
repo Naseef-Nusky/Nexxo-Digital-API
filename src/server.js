@@ -10,7 +10,15 @@ app.use(helmet())
 app.use(
   cors({
     origin(origin, callback) {
+      // Allow non-browser tools (no Origin) and configured frontends
       if (!origin || config.corsOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+      // In development, allow any localhost / 127.0.0.1 Vite port
+      if (
+        config.nodeEnv !== 'production' &&
+        /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+      ) {
         return callback(null, true)
       }
       return callback(new Error(`Origin ${origin} not allowed by CORS`))

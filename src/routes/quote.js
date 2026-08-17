@@ -40,9 +40,6 @@ function validateQuote(body = {}) {
   if (!payload.need) {
     errors.push('Please select what you need.')
   }
-  if (!payload.project || payload.project.length < 10) {
-    errors.push('Please tell us a bit more about your project.')
-  }
   if (payload.project.length > 5000) {
     errors.push('Project details are too long.')
   }
